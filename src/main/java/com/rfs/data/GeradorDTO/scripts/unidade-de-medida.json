@@ -1,0 +1,28 @@
+{
+  "nomeTabela": "GEUNIDADE",
+  "nomeEntity": "UnidadeMedida",
+  "fields": [
+    {
+      "nomeCampoTabela": "CD_UNIDADE",
+      "nomeAtributoEntity": "id",
+      "requerido": true,
+      "tipo": "LONG"
+    },
+    {
+      "nomeCampoTabela": "NM_UNIDADE",
+      "nomeAtributoEntity": "nome",
+      "requerido": true,
+      "tipo": "String",
+      "tamanhoCampo": 60
+    }
+  ],
+  "geraId": false,
+  "usaLoombok": true,
+  "geraRepository": true,
+  "geraService": true,
+  "geraDTO": true,
+  "geraController": true,
+  "geraPesquisa": true,
+  "geraTeste": true,
+  "geraLiquibase": true
+}
