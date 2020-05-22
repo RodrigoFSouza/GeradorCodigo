@@ -1,6 +1,5 @@
 package com.rfs.data.GeradorDTO.domain.models;
 
-
 import lombok.*;
 
 import javax.persistence.*;
