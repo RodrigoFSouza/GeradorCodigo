@@ -18,6 +18,8 @@
   ],
   "geraId": false,
   "usaLoombok": true,
+  "geraBuilderEntidade": true,
+  "geraMergeForUpdate": true,
   "geraRepository": true,
   "geraService": true,
   "geraDTO": true,
