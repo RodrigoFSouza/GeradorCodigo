@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.Cidade;
+
 import com.rfs.data.GeradorDTO.domain.dto.CidadeDTO;
+import com.rfs.data.GeradorDTO.domain.models.Cidade;
 
 public interface CidadeMapper {
     CidadeDTO toDto(Cidade cidade);

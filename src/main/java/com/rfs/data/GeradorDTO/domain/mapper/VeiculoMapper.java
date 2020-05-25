@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.Veiculo;
+
 import com.rfs.data.GeradorDTO.domain.dto.VeiculoDTO;
+import com.rfs.data.GeradorDTO.domain.models.Veiculo;
 
 public interface VeiculoMapper {
     VeiculoDTO toDto(Veiculo veiculo);

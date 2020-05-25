@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.Fornecedor;
+
 import com.rfs.data.GeradorDTO.domain.dto.FornecedorDTO;
+import com.rfs.data.GeradorDTO.domain.models.Fornecedor;
 
 public interface FornecedorMapper {
     FornecedorDTO toDto(Fornecedor fornecedor);

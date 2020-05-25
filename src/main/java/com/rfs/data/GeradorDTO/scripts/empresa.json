@@ -1,37 +1,37 @@
 {
-  "nomeTabela": "GEEMPRESA",
+  "nomeDaTabela": "GEEMPRESA",
   "nomeEntity": "Empresa",
   "fields": [
     {
       "nomeCampoTabela": "CD_EMPRESA",
-      "nomeAtributoEntity": "id",
+      "nomeCampoEntity": "id",
       "requerido": true,
       "tipo": "LONG"
     },
     {
       "nomeCampoTabela": "NM_EMPRESA",
-      "nomeAtributoEntity": "nomeEmpresa",
+      "nomeCampoEntity": "nomeEmpresa",
       "requerido": true,
       "tipo": "String",
       "tamanhoCampo": 60
     },
     {
       "nomeCampoTabela": "DS_EMAIL",
-      "nomeAtributoEntity": "email",
+      "nomeCampoEntity": "email",
       "requerido": true,
       "tipo": "String",
       "tamanhoCampo": 240
     },
     {
       "nomeCampoTabela": "DS_TELEFONE",
-      "nomeAtributoEntity": "telefone",
+      "nomeCampoEntity": "telefone",
       "requerido": true,
       "tipo": "String",
       "tamanhoCampo": 22
     },
     {
       "nomeCampoTabela": "DS_DATA_FUNDACAO",
-      "nomeAtributoEntity": "dataFundacao",
+      "nomeCampoEntity": "dataFundacao",
       "requerido": true,
       "tipo": "LocalDate"
     }

@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.Concorrente;
+
 import com.rfs.data.GeradorDTO.domain.dto.ConcorrenteDTO;
+import com.rfs.data.GeradorDTO.domain.models.Concorrente;
 
 public interface ConcorrenteMapper {
     ConcorrenteDTO toDto(Concorrente concorrente);

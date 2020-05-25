@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.Estado;
+
 import com.rfs.data.GeradorDTO.domain.dto.EstadoDTO;
+import com.rfs.data.GeradorDTO.domain.models.Estado;
 
 public interface EstadoMapper {
     EstadoDTO toDto(Estado estado);

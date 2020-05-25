@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.IndiceEconomico;
+
 import com.rfs.data.GeradorDTO.domain.dto.IndiceEconomicoDTO;
+import com.rfs.data.GeradorDTO.domain.models.IndiceEconomico;
 
 public interface IndiceEconomicoMapper {
     IndiceEconomicoDTO toDto(IndiceEconomico indiceEconomico);

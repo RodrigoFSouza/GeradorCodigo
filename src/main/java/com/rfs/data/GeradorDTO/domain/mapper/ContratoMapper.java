@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.Contrato;
+
 import com.rfs.data.GeradorDTO.domain.dto.ContratoDTO;
+import com.rfs.data.GeradorDTO.domain.models.Contrato;
 
 public interface ContratoMapper {
     ContratoDTO toDto(Contrato contrato);

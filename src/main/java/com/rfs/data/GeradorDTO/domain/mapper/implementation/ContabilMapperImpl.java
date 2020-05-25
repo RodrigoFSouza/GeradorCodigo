@@ -4,7 +4,6 @@ import com.rfs.data.GeradorDTO.domain.dto.ContabilDTO;
 import com.rfs.data.GeradorDTO.domain.mapper.AuditoriaMapper;
 import com.rfs.data.GeradorDTO.domain.mapper.ClienteMapper;
 import com.rfs.data.GeradorDTO.domain.mapper.ContabilMapper;
-import com.rfs.data.GeradorDTO.domain.mapper.IndiceEconomicoMapper;
 import com.rfs.data.GeradorDTO.domain.models.Contabil;
 import org.springframework.beans.factory.annotation.Autowired;
 

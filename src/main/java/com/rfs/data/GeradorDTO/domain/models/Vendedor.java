@@ -1,6 +1,11 @@
 package com.rfs.data.GeradorDTO.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.rfs.data.GeradorDTO.domain.models.enumeration.SimNao;
+import com.rfs.data.GeradorDTO.domain.models.enumeration.Situacao;
+import com.rfs.data.GeradorDTO.domain.models.enumeration.TipoPagamentoVendedor;
+import com.rfs.data.GeradorDTO.domain.models.enumeration.TipoPessoa;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,9 +15,6 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.rfs.data.GeradorDTO.domain.models.enumeration.*;
-import lombok.*;
 
 @Getter
 @Setter

@@ -1,6 +1,5 @@
 package com.rfs.data.GeradorDTO.domain.mapper.implementation;
 
-import com.rfs.data.GeradorDTO.domain.dto.AuditoriaDTO;
 import com.rfs.data.GeradorDTO.domain.dto.PaisDTO;
 import com.rfs.data.GeradorDTO.domain.mapper.AuditoriaMapper;
 import com.rfs.data.GeradorDTO.domain.mapper.PaisMapper;

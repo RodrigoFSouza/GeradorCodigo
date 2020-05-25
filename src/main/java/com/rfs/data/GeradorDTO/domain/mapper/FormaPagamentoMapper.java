@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.FormaPagamento;
+
 import com.rfs.data.GeradorDTO.domain.dto.FormaPagamentoDTO;
+import com.rfs.data.GeradorDTO.domain.models.FormaPagamento;
 
 public interface FormaPagamentoMapper {
     FormaPagamentoDTO toDto(FormaPagamento formaPagamento);

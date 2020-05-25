@@ -9,8 +9,9 @@ public class FieldTranspiler {
     private String nomeCampoTabela;
     private String nomeCampoEntity;
     private String tipo;
-    private Boolean required;
+    private boolean requerido;
     private Integer tamanhoCampo;
     private Integer comprimentoMinimo;
     private Integer comprimentoMaximo;
+
 }

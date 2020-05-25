@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.TipoAtividade;
+
 import com.rfs.data.GeradorDTO.domain.dto.TipoAtividadeDTO;
+import com.rfs.data.GeradorDTO.domain.models.TipoAtividade;
 
 public interface TipoAtividadeMapper {
     TipoAtividadeDTO toDto(TipoAtividade tipoAtividade);

@@ -1,7 +1,10 @@
 package com.rfs.data.GeradorDTO.domain.mapper.implementation;
 
 import com.rfs.data.GeradorDTO.domain.dto.VendedorDTO;
-import com.rfs.data.GeradorDTO.domain.mapper.*;
+import com.rfs.data.GeradorDTO.domain.mapper.AuditoriaMapper;
+import com.rfs.data.GeradorDTO.domain.mapper.EnderecoMapper;
+import com.rfs.data.GeradorDTO.domain.mapper.FornecedorMapper;
+import com.rfs.data.GeradorDTO.domain.mapper.VendedorMapper;
 import com.rfs.data.GeradorDTO.domain.models.Vendedor;
 import org.springframework.beans.factory.annotation.Autowired;
 

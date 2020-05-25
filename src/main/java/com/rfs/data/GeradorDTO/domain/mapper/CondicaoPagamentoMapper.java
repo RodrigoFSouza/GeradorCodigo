@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.CondicaoPagamento;
+
 import com.rfs.data.GeradorDTO.domain.dto.CondicaoPagamentoDTO;
+import com.rfs.data.GeradorDTO.domain.models.CondicaoPagamento;
 
 public interface CondicaoPagamentoMapper {
     CondicaoPagamentoDTO toDto(CondicaoPagamento condicaoPagamento);

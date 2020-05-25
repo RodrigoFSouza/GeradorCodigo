@@ -1,134 +1,134 @@
 {
-  "nomeTabela": "GEFUNCIO ",
-  "nomeEntity": "Usuario",
+  "nomeDaTabela": "GEFUNCIO ",
+  "nomeEntity": "usuario",
   "fields": [
     {
       "nomeCampoTabela": "CD_FIL",
-      "nomeAtributoEntity": "empresa",
+      "nomeCampoEntity": "empresa",
       "requerido": true,
-      "tipo": "LONG"
+      "tipo": "Long"
     },
     {
       "nomeCampoTabela": "CD_FUNC",
-      "nomeAtributoEntity": "id",
+      "nomeCampoEntity": "id",
       "requerido": true,
       "tipo": "LONG"
     },
     {
       "nomeCampoTabela": "NM_FUNC",
-      "nomeAtributoEntity": "nome",
+      "nomeCampoEntity": "nome",
       "requerido": true,
       "tipo": "String",
       "tamanhoCampo": 40
     },
     {
       "nomeCampoTabela": "ST_USO_SISTEMA",
-      "nomeAtributoEntity": "usaSistema",
+      "nomeCampoEntity": "usaSistema",
       "requerido": true,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "ST_TROCA_FILIAL",
-      "nomeAtributoEntity": "trocaFilial",
+      "nomeCampoEntity": "trocaFilial",
       "requerido": true,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "ST_ACESSO_FILA_PRODUCAO",
-      "nomeAtributoEntity": "acessaFilaDeProducao",
+      "nomeCampoEntity": "acessaFilaDeProducao",
       "requerido": true,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "NM_CAMINHO_ASSINATURA",
-      "nomeAtributoEntity": "caminhoAssinatura",
+      "nomeCampoEntity": "caminhoAssinatura",
       "requerido": false,
       "tipo": "String",
       "tamanhoCampo": 200
     },
     {
       "nomeCampoTabela": "ST_LIBERA_CRITICA",
-      "nomeAtributoEntity": "liberaCritica",
+      "nomeCampoEntity": "liberaCritica",
       "requerido": true,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "DS_SENHA_CRITICA",
-      "nomeAtributoEntity": "senhaCritica",
+      "nomeCampoEntity": "senhaCritica",
       "requerido": false,
       "tipo": "String",
       "tamanhoCampo": 6
     },
     {
       "nomeCampoTabela": "ST_GERA_CONTRATO",
-      "nomeAtributoEntity": "geraContrtao",
+      "nomeCampoEntity": "geraContrtao",
       "requerido": true,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "ST_USUARIO_MASTER",
-      "nomeAtributoEntity": "usuarioMaster",
+      "nomeCampoEntity": "usuarioMaster",
       "requerido": false,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "TP_USUARIO_ORCAMENTO",
-      "nomeAtributoEntity": "usuarioOrcamento",
+      "nomeCampoEntity": "usuarioOrcamento",
       "requerido": false,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "ST_TREINAMENTO",
-      "nomeAtributoEntity": "treinamento",
+      "nomeCampoEntity": "treinamento",
       "requerido": true,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "ST_ALTERA_PC_COMISSAO_VENDA",
-      "nomeAtributoEntity": "alteraPercentualComissaoVenda",
+      "nomeCampoEntity": "alteraPercentualComissaoVenda",
       "requerido": true,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "ST_EXPIRA_SENHA",
-      "nomeAtributoEntity": "senhaExpira",
+      "nomeCampoEntity": "senhaExpira",
       "requerido": false,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "DT_EXPIRA_SENHA",
-      "nomeAtributoEntity": "dataExpiraSenha",
+      "nomeCampoEntity": "dataExpiraSenha",
       "requerido": false,
       "tipo": "LocalDateTime"
     },
     {
       "nomeCampoTabela": "DS_ACESSO",
-      "nomeAtributoEntity": "acesso",
+      "nomeCampoEntity": "acesso",
       "requerido": false,
       "tipo": "String",
       "tamanhoCampo": 30
     },
     {
       "nomeCampoTabela": "ST_SITUACAO",
-      "nomeAtributoEntity": "situacao",
+      "nomeCampoEntity": "situacao",
       "requerido": false,
       "tipo": "Situacao"
     },
     {
       "nomeCampoTabela": "ST_ADMINISTRADOR",
-      "nomeAtributoEntity": "administrador",
+      "nomeCampoEntity": "administrador",
       "requerido": true,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "ST_VENDEDOR",
-      "nomeAtributoEntity": "vendedor",
+      "nomeCampoEntity": "vendedor",
       "requerido": true,
       "tipo": "SimNao"
     },
     {
       "nomeCampoTabela": "DS_EMAIL",
-      "nomeAtributoEntity": "id",
+      "nomeCampoEntity": "email",
       "requerido": false,
       "tipo": "String",
       "tamanhoCampo": 600

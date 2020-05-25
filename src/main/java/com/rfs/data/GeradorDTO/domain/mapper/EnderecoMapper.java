@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.Endereco;
+
 import com.rfs.data.GeradorDTO.domain.dto.EnderecoDTO;
+import com.rfs.data.GeradorDTO.domain.models.Endereco;
 
 public interface EnderecoMapper {
     EnderecoDTO toDto(Endereco endereco);

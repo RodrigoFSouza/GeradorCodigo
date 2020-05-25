@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.Contato;
+
 import com.rfs.data.GeradorDTO.domain.dto.ContatoDTO;
+import com.rfs.data.GeradorDTO.domain.models.Contato;
 
 public interface ContatoMapper {
     ContatoDTO toDto(Contato contato);

@@ -1,16 +1,16 @@
 {
-  "nomeTabela": "GEUNIDADE",
+  "nomeDaTabela": "GEUNIDADE",
   "nomeEntity": "UnidadeMedida",
   "fields": [
     {
       "nomeCampoTabela": "CD_UNIDADE",
-      "nomeAtributoEntity": "id",
+      "nomeCampoEntity": "id",
       "requerido": true,
       "tipo": "LONG"
     },
     {
       "nomeCampoTabela": "NM_UNIDADE",
-      "nomeAtributoEntity": "nome",
+      "nomeCampoEntity": "nome",
       "requerido": true,
       "tipo": "String",
       "tamanhoCampo": 60

@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.domain.mapper;
-import com.rfs.data.GeradorDTO.domain.models.Regiao;
+
 import com.rfs.data.GeradorDTO.domain.dto.RegiaoDTO;
+import com.rfs.data.GeradorDTO.domain.models.Regiao;
 
 public interface RegiaoMapper {
     RegiaoDTO toDto(Regiao regiao);

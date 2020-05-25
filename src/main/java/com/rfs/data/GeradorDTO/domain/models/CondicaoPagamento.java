@@ -5,7 +5,9 @@ import com.rfs.data.GeradorDTO.domain.models.enumeration.TipoUtilizacao;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
