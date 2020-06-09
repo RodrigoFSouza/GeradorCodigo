@@ -1,6 +1,25 @@
 package com.rfs.data.GeradorDTO.service.geradores;
 
+import com.rfs.data.GeradorDTO.transpiler.EntityTranspiler;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
 public class GeradorController {
+
+    @Value("${api.packageBase}")
+    private String packageBase;
+
+    private WriteTemplate writeTemplate;
+
+    @Autowired
+    public GeradorController(WriteTemplate writeTemplate) {
+        this.writeTemplate = writeTemplate;
+    }
    
     
     private String template = """
@@ -105,5 +124,18 @@ public class GeradorController {
                     }
                 }
             """;
+
+    public void gerandoController(List<EntityTranspiler> transpilers) {
+        for (EntityTranspiler entityTranspiler: transpilers) {
+            var templateController = template.replaceAll("<packageNameBase>", packageBase)
+                    .replaceAll("<entityName>", entityTranspiler.getNomeEntity())
+                    .replaceAll("<entityNameUncapitalize>", StringUtils.uncapitalize(entityTranspiler.getNomeEntity()));
+
+            var nomeArquivo = entityTranspiler.getNomeEntity() + "Resource.java";
+            var packageDiretorio = packageBase + "web.rest";
+
+            writeTemplate.adicionaTemplateNoArquivo(templateController, nomeArquivo, packageDiretorio);
+        }
+    }
 
 }

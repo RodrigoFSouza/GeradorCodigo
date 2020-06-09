@@ -16,7 +16,7 @@ public class ReadTemplate {
     @Value("${api.path-script}")
     private static String pathScript;
 
-    public static List<EntityTranspiler> readJsonScripts() {
+    public List<EntityTranspiler> readJsonScripts() {
         File diretorio = new File(pathScript);
         List<EntityTranspiler> transpilers = new ArrayList<>();
 

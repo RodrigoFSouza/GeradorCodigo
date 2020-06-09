@@ -122,10 +122,9 @@ public class GeradorService {
                         
             """;
 
-    public void gerandoDto(List<EntityTranspiler> transpilers) {
-        String templateService = null;
+    public void gerarService(List<EntityTranspiler> transpilers) {
         for (EntityTranspiler entityTranspiler: transpilers) {
-            templateService = template.replaceAll("<packageNameBase>", packageBase)
+            var templateService = template.replaceAll("<packageNameBase>", packageBase)
                     .replaceAll("<entityName>", entityTranspiler.getNomeEntity())
                     .replaceAll("<entityNameUncapitalize>", StringUtils.uncapitalize(entityTranspiler.getNomeEntity()));
 

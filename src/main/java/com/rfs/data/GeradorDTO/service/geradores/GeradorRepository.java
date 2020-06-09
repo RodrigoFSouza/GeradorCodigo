@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GeradorRepository {
     @Value("${api.packageBase}")
@@ -35,13 +37,15 @@ public class GeradorRepository {
                         
             """;
 
-    public void gerarClasseRepository(EntityTranspiler entityTranspiler) {
-        var template = templateRepository
-                .replaceAll("<packageBase>", packageBase)
-                .replaceAll("<entityBase>", entityTranspiler.getNomeEntity());
+    public void gerarRepository(List<EntityTranspiler> transpilers) {
+        for (EntityTranspiler entityTranspiler: transpilers) {
+            var template = templateRepository
+                    .replaceAll("<packageBase>", packageBase)
+                    .replaceAll("<entityBase>", entityTranspiler.getNomeEntity());
 
-        var nomeDoArquivo = entityTranspiler.getNomeEntity() + "Repository.java";
-        var diretorioPackage = "repository";
-        this.writeTemplate.adicionaTemplateNoArquivo(template, nomeDoArquivo, diretorioPackage);
+            var nomeDoArquivo = entityTranspiler.getNomeEntity() + "Repository.java";
+            var diretorioPackage = "repository";
+            this.writeTemplate.adicionaTemplateNoArquivo(template, nomeDoArquivo, diretorioPackage);
+        }
     }
 }
