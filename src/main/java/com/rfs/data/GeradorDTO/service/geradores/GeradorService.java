@@ -1,22 +1,21 @@
 package com.rfs.data.GeradorDTO.service.geradores;
 
+import com.rfs.data.GeradorDTO.config.ApplicationProperties;
 import com.rfs.data.GeradorDTO.transpiler.EntityTranspiler;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class GeradorService {
-    @Value("${api.packageBase}")
-    private String packageBase;
-
+    private ApplicationProperties applicationProperties;
     private WriteTemplate writeTemplate;
 
     @Autowired
-    public GeradorService(WriteTemplate writeTemplate) {
+    public GeradorService(ApplicationProperties applicationProperties, WriteTemplate writeTemplate) {
+        this.applicationProperties = applicationProperties;
         this.writeTemplate = writeTemplate;
     }
 
@@ -123,9 +122,10 @@ public class GeradorService {
             """;
 
     public void gerarService(List<EntityTranspiler> transpilers) {
+        String packageBase = applicationProperties.getPackageBase();
         for (EntityTranspiler entityTranspiler: transpilers) {
             var templateService = template.replaceAll("<packageNameBase>", packageBase)
-                    .replaceAll("<entityName>", entityTranspiler.getNomeEntity())
+                    .replaceAll("<entityName>", StringUtils.capitalize(entityTranspiler.getNomeEntity()))
                     .replaceAll("<entityNameUncapitalize>", StringUtils.uncapitalize(entityTranspiler.getNomeEntity()));
 
             var nomeArquivo = entityTranspiler.getNomeEntity() + "ServiceImpl.java";

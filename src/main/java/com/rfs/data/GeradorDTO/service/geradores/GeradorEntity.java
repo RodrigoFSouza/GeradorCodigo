@@ -1,13 +1,15 @@
 package com.rfs.data.GeradorDTO.service.geradores;
 
+import com.rfs.data.GeradorDTO.config.ApplicationProperties;
 import com.rfs.data.GeradorDTO.service.Atributo;
 import com.rfs.data.GeradorDTO.service.builders.AtributoBuilderImpl;
 import com.rfs.data.GeradorDTO.service.builders.EntityBuilderImpl;
 import com.rfs.data.GeradorDTO.service.enuns.ModificadorDeAcesso;
 import com.rfs.data.GeradorDTO.transpiler.EntityTranspiler;
 import com.rfs.data.GeradorDTO.transpiler.FieldTranspiler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -18,13 +20,13 @@ import static java.util.Objects.nonNull;
 
 @Service
 public class GeradorEntity {
-    @Value("${api.pakage-name")
-    private String packageName;
-
+    private Logger log = LoggerFactory.getLogger(GeradorEntity.class);
+    private ApplicationProperties applicationProperties;
     private WriteTemplate writeTemplate;
 
     @Autowired
-    public GeradorEntity(WriteTemplate writeTemplate) {
+    public GeradorEntity(ApplicationProperties applicationProperties, WriteTemplate writeTemplate) {
+        this.applicationProperties = applicationProperties;
         this.writeTemplate = writeTemplate;
     }
 
@@ -53,7 +55,7 @@ public class GeradorEntity {
             var entityBuilder = new EntityBuilderImpl()
                     .nomeDaEntity(entityTranspiler.getNomeEntity())
                     .nomeDaTabela(entityTranspiler.getNomeDaTabela())
-                    .nomeDoPacote(packageName + "domain.models;")
+                    .nomeDoPacote("package" + applicationProperties.getPackageBase() + "domain.models;")
                     .anotationsDaClasse(anotationsClasse)
                     .imports(imports)
                     .atributosDaClasse(atributosDaClasse);
@@ -72,7 +74,6 @@ public class GeradorEntity {
 
             var classeEntity = entityBuilder.build();
 
-            System.out.println(classeEntity.getTemplate());
             String nomeArquivo = entityTranspiler.getNomeEntity() + ".java";
             String diretorioPackage = "domain.models";
             writeTemplate.adicionaTemplateNoArquivo(classeEntity.getTemplate(), nomeArquivo, diretorioPackage);

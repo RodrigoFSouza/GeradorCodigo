@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.controller;
 
 import com.rfs.data.GeradorDTO.service.geradores.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,12 +25,18 @@ public class GeneratorResource {
 
 
     @GetMapping("/criarCrud")
-    private void criarCrud() {
+    public ResponseEntity<String> criarCrud() {
         var listEntityTranspilers = readTemplate.readJsonScripts();
-        this.geradorEntity.criaEntity(listEntityTranspilers);
-        this.geradorRepository.gerarRepository(listEntityTranspilers);
-        this.geradorService.gerarService(listEntityTranspilers);
-        this.geradorController.gerandoController(listEntityTranspilers);
+        try {
+            this.geradorEntity.criaEntity(listEntityTranspilers);
+            this.geradorRepository.gerarRepository(listEntityTranspilers);
+            this.geradorService.gerarService(listEntityTranspilers);
+            this.geradorController.gerandoController(listEntityTranspilers);
+            return ResponseEntity.ok("Artefatos Criados com Sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Algo deu Errado ao criar os artefatos. Exception: " + e.getMessage());
+        }
+
     }
 
 }

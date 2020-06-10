@@ -1,21 +1,21 @@
 package com.rfs.data.GeradorDTO.service.geradores;
 
+import com.rfs.data.GeradorDTO.config.ApplicationProperties;
 import com.rfs.data.GeradorDTO.transpiler.EntityTranspiler;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class GeradorRepository {
-    @Value("${api.packageBase}")
-    private String packageBase;
-
+    private ApplicationProperties applicationProperties;
     private WriteTemplate writeTemplate;
 
     @Autowired
-    public GeradorRepository(WriteTemplate writeTemplate) {
+    public GeradorRepository(ApplicationProperties applicationProperties, WriteTemplate writeTemplate) {
+        this.applicationProperties = applicationProperties;
         this.writeTemplate = writeTemplate;
     }
 
@@ -38,10 +38,11 @@ public class GeradorRepository {
             """;
 
     public void gerarRepository(List<EntityTranspiler> transpilers) {
+        String packageBase = applicationProperties.getPackageBase();
         for (EntityTranspiler entityTranspiler: transpilers) {
             var template = templateRepository
-                    .replaceAll("<packageBase>", packageBase)
-                    .replaceAll("<entityBase>", entityTranspiler.getNomeEntity());
+                    .replaceAll("<package-base>", packageBase)
+                    .replaceAll("<entity-base>", StringUtils.capitalize(entityTranspiler.getNomeEntity()));
 
             var nomeDoArquivo = entityTranspiler.getNomeEntity() + "Repository.java";
             var diretorioPackage = "repository";

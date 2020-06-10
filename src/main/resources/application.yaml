@@ -1,0 +1,6 @@
+application:
+  api:
+    package-base: 'com.rfs.data.GeradorDTO'
+    path-base: 'C:\\projetos\\codeGenerator\\src\\main\\java\\com\\rfs\\data\\GeradorDTO\\'
+    path-script: 'C:\\projetos\\codeGenerator\\src\\main\\java\\com\\rfs\\data\\GeradorDTO\\scripts'
+    path-artefatos: 'C:\projetos\codeGenerator\src\main\java\com\rfs\data\GeradorDTO\artefatosGerados'

@@ -1,6 +1,7 @@
 package com.rfs.data.GeradorDTO.service.geradores;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.rfs.data.GeradorDTO.config.ApplicationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -10,12 +11,15 @@ import java.nio.file.Paths;
 
 @Service
 public class WriteTemplate {
+    private ApplicationProperties applicationProperties;
 
-    @Value("${api.path-base")
-    private String pathBase;
+    @Autowired
+    public WriteTemplate(ApplicationProperties applicationProperties) {
+        this.applicationProperties = applicationProperties;
+    }
 
     public  void adicionaTemplateNoArquivo(String template, String nomeDoArquivo, String diretorioPackage) {
-        Path diretorio = Paths.get(this.pathBase + diretorioPackage);
+        Path diretorio = Paths.get(this.applicationProperties.getPathArtefatos());
         if (Files.notExists(diretorio)) {
             try {
                 Files.createDirectory(diretorio);
