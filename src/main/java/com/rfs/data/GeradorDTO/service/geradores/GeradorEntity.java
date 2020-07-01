@@ -100,7 +100,10 @@ public class GeradorEntity {
                     atributoBuilder.adicionarAnotacao("    @NotNull\n");
                 }
                 if (nonNull(field.getTamanhoCampo())) {
-                    atributoBuilder.adicionarAnotacao("    Size(max = " + field.getTamanhoCampo() + ")\n");
+                    atributoBuilder.adicionarAnotacao("    @Size(max = " + field.getTamanhoCampo() + ", " +
+                            "message = \"O " + field.getNomeCampoEntity() +
+                            " não pode ter mais do que " + field.getTamanhoCampo() +
+                            " caracteres\")\n");
                 }
 
                 atributoBuilder

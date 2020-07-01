@@ -6,7 +6,7 @@
       "nomeCampoTabela": "CD_EMPRESA",
       "nomeCampoEntity": "id",
       "requerido": true,
-      "tipo": "LONG"
+      "tipo": "Long"
     },
     {
       "nomeCampoTabela": "NM_EMPRESA",
