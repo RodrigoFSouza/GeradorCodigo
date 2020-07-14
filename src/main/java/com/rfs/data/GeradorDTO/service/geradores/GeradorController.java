@@ -1,7 +1,7 @@
 package com.rfs.data.GeradorDTO.service.geradores;
 
 import com.rfs.data.GeradorDTO.config.ApplicationProperties;
-import com.rfs.data.GeradorDTO.transpiler.EntityTranspiler;
+import com.rfs.data.GeradorDTO.domain.model.Entidade;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -123,14 +123,14 @@ public class GeradorController {
                 }
             """;
 
-    public void gerandoController(List<EntityTranspiler> transpilers) {
+    public void gerandoController(List<Entidade> entidades) {
         String packageBase = applicationProperties.getPackageBase();
-        for (EntityTranspiler entityTranspiler: transpilers) {
+        for (Entidade entidade: entidades) {
             var templateController = template.replaceAll("<packageNameBase>", packageBase)
-                    .replaceAll("<entityName>", StringUtils.capitalize(entityTranspiler.getNomeEntity()))
-                    .replaceAll("<entityNameUncapitalize>", StringUtils.uncapitalize(entityTranspiler.getNomeEntity()));
+                    .replaceAll("<entityName>", StringUtils.capitalize(entidade.getNomeEntity()))
+                    .replaceAll("<entityNameUncapitalize>", StringUtils.uncapitalize(entidade.getNomeEntity()));
 
-            var nomeArquivo = entityTranspiler.getNomeEntity() + "Resource.java";
+            var nomeArquivo = entidade.getNomeEntity() + "Resource.java";
             var packageDiretorio = packageBase + "web.rest";
 
             writeTemplate.adicionaTemplateNoArquivo(templateController, nomeArquivo, packageDiretorio);

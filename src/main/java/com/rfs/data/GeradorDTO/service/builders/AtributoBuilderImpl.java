@@ -1,7 +1,7 @@
 package com.rfs.data.GeradorDTO.service.builders;
 
-import com.rfs.data.GeradorDTO.service.Atributo;
-import com.rfs.data.GeradorDTO.service.enuns.ModificadorDeAcesso;
+import com.rfs.data.GeradorDTO.domain.model.Anotacao;
+import com.rfs.data.GeradorDTO.domain.model.Atributo;
 import org.apache.commons.lang3.StringUtils;
 
 public class AtributoBuilderImpl implements  AtributoBuilder {
@@ -12,7 +12,7 @@ public class AtributoBuilderImpl implements  AtributoBuilder {
     }
 
     @Override
-    public AtributoBuilder modificadorAcesso(ModificadorDeAcesso modificador) {
+    public AtributoBuilder modificadorAcesso(String modificador) {
         this.atributo.setModificadorDeAcesso(modificador);
         return this;
     }
@@ -25,13 +25,19 @@ public class AtributoBuilderImpl implements  AtributoBuilder {
 
     @Override
     public AtributoBuilder nomeDoAtributo(String nome) {
-        this.atributo.setNome(StringUtils.uncapitalize(nome));
+        this.atributo.setNomeCampoTabela(StringUtils.uncapitalize(nome));
         return this;
     }
 
     @Override
     public AtributoBuilder adicionarAnotacao(String anotacao) {
-        this.atributo.adicionarAnotacao(anotacao);
+        this.atributo.addAnotacao(new Anotacao());
+        return this;
+    }
+
+    @Override
+    public AtributoBuilder comId(String id) {
+        this.atributo.setCampoId(id);
         return this;
     }
 
@@ -40,4 +46,6 @@ public class AtributoBuilderImpl implements  AtributoBuilder {
 
         return this.atributo;
     }
+
+
 }

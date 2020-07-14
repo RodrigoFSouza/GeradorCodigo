@@ -1,6 +1,26 @@
+server:
+  port: 8990
+
 application:
   api:
     package-base: 'com.rfs.data.GeradorDTO'
     path-base: 'C:\\projetos\\codeGenerator\\src\\main\\java\\com\\rfs\\data\\GeradorDTO\\'
     path-script: 'C:\\projetos\\codeGenerator\\src\\main\\java\\com\\rfs\\data\\GeradorDTO\\scripts'
     path-artefatos: 'C:\projetos\codeGenerator\src\main\java\com\rfs\data\GeradorDTO\artefatosGerados'
+
+## default connection pool
+spring:
+  datasource:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+
+    ## PostgreSQL
+    url: jdbc:postgresql://localhost:5432/gerador
+    username: postgres
+    password: postgres
+
+  #drop n create table again, good for testing, comment this in production
+  jpa:
+    hibernate:
+      ddl-auto: create

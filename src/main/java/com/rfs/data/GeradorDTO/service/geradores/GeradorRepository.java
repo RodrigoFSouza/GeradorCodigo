@@ -1,7 +1,7 @@
 package com.rfs.data.GeradorDTO.service.geradores;
 
 import com.rfs.data.GeradorDTO.config.ApplicationProperties;
-import com.rfs.data.GeradorDTO.transpiler.EntityTranspiler;
+import com.rfs.data.GeradorDTO.domain.model.Entidade;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,9 +37,9 @@ public class GeradorRepository {
                         
             """;
 
-    public void gerarRepository(List<EntityTranspiler> transpilers) {
+    public void gerarRepository(List<Entidade> entidades) {
         String packageBase = applicationProperties.getPackageBase();
-        for (EntityTranspiler entityTranspiler: transpilers) {
+        for (Entidade entityTranspiler: entidades) {
             var template = templateRepository
                     .replaceAll("<package-base>", packageBase)
                     .replaceAll("<entity-base>", StringUtils.capitalize(entityTranspiler.getNomeEntity()));

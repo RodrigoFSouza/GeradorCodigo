@@ -1,5 +1,6 @@
 package com.rfs.data.GeradorDTO.service;
 
+import com.rfs.data.GeradorDTO.domain.model.Atributo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,8 +22,10 @@ public class ClasseEntity {
     private String constructorAllArgs;
     private String toString;
     private String mergeForUpdate;
+    private String idDaClasse;
 
     public ClasseEntity() {
+
     }
 
     public String getTemplate() {

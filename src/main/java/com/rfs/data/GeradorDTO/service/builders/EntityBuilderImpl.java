@@ -1,8 +1,8 @@
 package com.rfs.data.GeradorDTO.service.builders;
 
-import com.rfs.data.GeradorDTO.service.Atributo;
+import com.rfs.data.GeradorDTO.domain.model.Atributo;
+import com.rfs.data.GeradorDTO.domain.model.Entidade;
 import com.rfs.data.GeradorDTO.service.ClasseEntity;
-import com.rfs.data.GeradorDTO.transpiler.EntityTranspiler;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Set;
@@ -64,17 +64,17 @@ public class EntityBuilderImpl implements EntityBuilder {
                     "        this.CAMPO = CAMPO;\n" +
                     "    }\n\n";
 
-            String nomeMetodoGet = "get" + StringUtils.capitalize(atributo.getNome());
-            String nomeMetodoSet = "set" + StringUtils.capitalize(atributo.getNome());
+            String nomeMetodoGet = "get" + StringUtils.capitalize(atributo.getNomeCampoEntity());
+            String nomeMetodoSet = "set" + StringUtils.capitalize(atributo.getNomeCampoEntity());
 
             builder.append(templateGet
                     .replaceAll("TIPO", atributo.getTipo())
-                    .replaceAll("CAMPO", atributo.getNome())
+                    .replaceAll("CAMPO", atributo.getNomeCampoEntity())
                     .replaceAll("NOME_METODO_GET", nomeMetodoGet));
 
             builder.append(templateSet
                     .replaceAll("TIPO", atributo.getTipo())
-                    .replaceAll("CAMPO", atributo.getNome())
+                    .replaceAll("CAMPO", atributo.getNomeCampoEntity())
                     .replaceAll("NOME_METODO_SET", nomeMetodoSet));
         }
 
@@ -83,7 +83,7 @@ public class EntityBuilderImpl implements EntityBuilder {
     }
 
     @Override
-    public EntityBuilder adicionaEqualsAndHashCode(EntityTranspiler transpiler) {
+    public EntityBuilder adicionaEqualsAndHashCode(Entidade transpiler) {
         var nomeEntity = StringUtils.capitalize(transpiler.getNomeEntity());
         String equals = "   @Override\n" +
             "    public boolean equals(Object o) {\n" +
@@ -105,7 +105,7 @@ public class EntityBuilderImpl implements EntityBuilder {
     }
 
     @Override
-    public EntityBuilder adicionaConstructor(EntityTranspiler transpiler) {
+    public EntityBuilder adicionaConstructor(Entidade transpiler) {
         var nomeEntity = StringUtils.capitalize(transpiler.getNomeEntity());
         String constructor = "    public " + nomeEntity + "() {\n" +
                 "    }";
@@ -115,7 +115,7 @@ public class EntityBuilderImpl implements EntityBuilder {
     }
 
     @Override
-    public EntityBuilder adicionaToString(EntityTranspiler transpiler) {
+    public EntityBuilder adicionaToString(Entidade transpiler) {
         StringBuilder builderTemplate = new StringBuilder();
         builderTemplate
                 .append("    @Override\n")
@@ -126,9 +126,9 @@ public class EntityBuilderImpl implements EntityBuilder {
 
         for (Atributo atributo: this.classeEntity.getAtritubos()) {
             builderTemplate.append("            \"")
-                    .append(atributo.getNome())
+                    .append(atributo.getNomeCampoEntity())
                     .append("\" = this.")
-                    .append(atributo.getNome())
+                    .append(atributo.getNomeCampoEntity())
                     .append(",\n");
         }
 
@@ -139,7 +139,7 @@ public class EntityBuilderImpl implements EntityBuilder {
     }
 
     @Override
-    public EntityBuilder adicionaMergeForUpdate(EntityTranspiler transpiler) {
+    public EntityBuilder adicionaMergeForUpdate(Entidade transpiler) {
         StringBuilder builderTemplate  = new StringBuilder();
         var nomeEntity = transpiler.getNomeEntity();
         var nomeEntityCapitalize = StringUtils.capitalize(nomeEntity);
@@ -156,11 +156,11 @@ public class EntityBuilderImpl implements EntityBuilder {
         for (Atributo atributo: this.classeEntity.getAtritubos()) {
             builderTemplate
                     .append("        this.")
-                    .append(atributo.getNome())
+                    .append(atributo.getNomeCampoEntity())
                     .append(" = ")
                     .append(nomeEntity)
                     .append(".get")
-                    .append(StringUtils.capitalize(atributo.getNome()))
+                    .append(StringUtils.capitalize(atributo.getNomeCampoEntity()))
                     .append("();\n");
         }
 

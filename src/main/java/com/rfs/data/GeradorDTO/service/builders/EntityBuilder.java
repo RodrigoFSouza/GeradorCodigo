@@ -1,8 +1,8 @@
 package com.rfs.data.GeradorDTO.service.builders;
 
-import com.rfs.data.GeradorDTO.service.Atributo;
+import com.rfs.data.GeradorDTO.domain.model.Atributo;
+import com.rfs.data.GeradorDTO.domain.model.Entidade;
 import com.rfs.data.GeradorDTO.service.ClasseEntity;
-import com.rfs.data.GeradorDTO.transpiler.EntityTranspiler;
 
 import java.util.Set;
 
@@ -14,9 +14,10 @@ public interface EntityBuilder {
     EntityBuilder imports(Set<String> imports);
     EntityBuilder atributosDaClasse(Set<Atributo> atributos);
     EntityBuilder adicionaGetAndSetters();
-    EntityBuilder adicionaEqualsAndHashCode(EntityTranspiler transpiler);
-    EntityBuilder adicionaConstructor(EntityTranspiler transpiler);
-    EntityBuilder adicionaToString(EntityTranspiler transpiler);
-    EntityBuilder adicionaMergeForUpdate(EntityTranspiler transpiler);
+    EntityBuilder adicionaEqualsAndHashCode(Entidade transpiler);
+    EntityBuilder adicionaConstructor(Entidade transpiler);
+    EntityBuilder adicionaToString(Entidade transpiler);
+    EntityBuilder adicionaMergeForUpdate(Entidade transpiler);
+
     ClasseEntity build();
 }

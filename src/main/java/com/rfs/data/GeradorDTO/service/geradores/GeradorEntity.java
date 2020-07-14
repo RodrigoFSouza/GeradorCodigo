@@ -1,12 +1,11 @@
 package com.rfs.data.GeradorDTO.service.geradores;
 
 import com.rfs.data.GeradorDTO.config.ApplicationProperties;
-import com.rfs.data.GeradorDTO.service.Atributo;
+import com.rfs.data.GeradorDTO.domain.model.Atributo;
+import com.rfs.data.GeradorDTO.domain.model.Entidade;
+import com.rfs.data.GeradorDTO.domain.vo.id.IdEntidade;
 import com.rfs.data.GeradorDTO.service.builders.AtributoBuilderImpl;
 import com.rfs.data.GeradorDTO.service.builders.EntityBuilderImpl;
-import com.rfs.data.GeradorDTO.service.enuns.ModificadorDeAcesso;
-import com.rfs.data.GeradorDTO.transpiler.EntityTranspiler;
-import com.rfs.data.GeradorDTO.transpiler.FieldTranspiler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,94 +29,96 @@ public class GeradorEntity {
         this.writeTemplate = writeTemplate;
     }
 
-    public void criaEntity(List<EntityTranspiler> transpilers) {
-        for (EntityTranspiler entityTranspiler : transpilers) {
+    public void criaEntity(List<Entidade> transpilers) {
+        for (Entidade entidade : transpilers) {
             Set<String> anotationsClasse = new HashSet<>();
             Set<String> imports = new HashSet<>();
 
-            imports.add("import javax.persistence.*;\n");
-            imports.add("import javax.validation.constraints.*;\n");
-            imports.add("import java.io.Serializable;\n");
+            adicionaImportsDaJPA(imports);
 
-            if (entityTranspiler.isUsaLoombok()) {
-                anotationsClasse.add("@Data\n");
-                anotationsClasse.add("@Builder\n");
-                imports.add("import lombok.Builder;\n");
-                imports.add("import lombok.Data;\n");
+            if (entidade.isUsaLoombok()) {
+                adicionaImportsDoLombok(anotationsClasse, imports);
             }
-            anotationsClasse.add("@Entity\n");
 
-            var table = "@Table(name = \"" + entityTranspiler.getNomeDaTabela().toUpperCase() + "\")\n";
-            anotationsClasse.add(table);
-
-            var atributosDaClasse = geraAtributosDaClasse(entityTranspiler);
+            if (entidade.isUsaJpa()) {
+                adicionaAnotacaoJpaAEntidade(entidade, anotationsClasse);
+            }
 
             var entityBuilder = new EntityBuilderImpl()
-                    .nomeDaEntity(entityTranspiler.getNomeEntity())
-                    .nomeDaTabela(entityTranspiler.getNomeDaTabela())
+                    .nomeDaEntity(entidade.getNomeEntity())
+                    .nomeDaTabela(entidade.getNomeDaTabela())
                     .nomeDoPacote("package" + applicationProperties.getPackageBase() + "domain.models;")
                     .anotationsDaClasse(anotationsClasse)
                     .imports(imports)
-                    .atributosDaClasse(atributosDaClasse);
+                    .atributosDaClasse(entidade.getAtributos());
 
-            if (!entityTranspiler.isUsaLoombok()) {
+            if (!entidade.isUsaLoombok()) {
                 entityBuilder
                         .adicionaGetAndSetters()
-                        .adicionaConstructor(entityTranspiler)
-                        .adicionaEqualsAndHashCode(entityTranspiler)
-                        .adicionaToString(entityTranspiler);
+                        .adicionaConstructor(entidade)
+                        .adicionaEqualsAndHashCode(entidade)
+                        .adicionaToString(entidade);
             }
 
-            if (entityTranspiler.isGeraMergeForUpdate()) {
-                entityBuilder.adicionaMergeForUpdate(entityTranspiler);
+            if (entidade.isGeraMergeForUpdate()) {
+                entityBuilder.adicionaMergeForUpdate(entidade);
             }
 
             var classeEntity = entityBuilder.build();
 
-            String nomeArquivo = entityTranspiler.getNomeEntity() + ".java";
+            String nomeArquivo = entidade.getNomeEntity() + ".java";
             String diretorioPackage = "domain.models";
             writeTemplate.adicionaTemplateNoArquivo(classeEntity.getTemplate(), nomeArquivo, diretorioPackage);
         }
     }
 
-    private static Set<Atributo> geraAtributosDaClasse(EntityTranspiler entityTranspiler) {
+    private static Set<Atributo> geraAtributosDaClasse(Entidade entidade) {
         Set<Atributo> atributos = new HashSet<>();
-        for (FieldTranspiler field: entityTranspiler.getFields()) {
-            if ("id".equals(field.getNomeCampoEntity())) {
-                if (!entityTranspiler.isGeraId()) {
-                    atributos.add(new AtributoBuilderImpl()
-                            .modificadorAcesso(ModificadorDeAcesso.PRIVATE)
-                            .tipoAtributo(field.getTipo())
-                            .nomeDoAtributo(field.getNomeCampoEntity())
-                            .adicionarAnotacao("    @Id\n")
-                            .adicionarAnotacao("    @Column(name = \"" + field.getNomeCampoTabela() + "\")\n")
-                            .build()
-                    );
-                }
-            } else {
-                var atributoBuilder = new AtributoBuilderImpl();
-                if (field.isRequerido()) {
+        for (Atributo atributo: entidade.getAtributos()) {
+            var atributoBuilder = new AtributoBuilderImpl();
+            if ("id".equals(atributo.getNomeCampoEntity())) {
+                atributoBuilder.comId(IdEntidade.codigoGeradoPelaAplicacao(atributo.getNomeCampoEntity(), atributo.getNomeCampoTabela()));
+            }
+
+            if (!"id".equals(atributo.getNomeCampoEntity())) {
+                if (atributo.isRequerido()) {
                     atributoBuilder.adicionarAnotacao("    @NotNull\n");
                 }
-                if (nonNull(field.getTamanhoCampo())) {
-                    atributoBuilder.adicionarAnotacao("    @Size(max = " + field.getTamanhoCampo() + ", " +
-                            "message = \"O " + field.getNomeCampoEntity() +
-                            " não pode ter mais do que " + field.getTamanhoCampo() +
+                if (nonNull(atributo.getTamanhoCampo())) {
+                    atributoBuilder.adicionarAnotacao("    @Size(max = " + atributo.getTamanhoCampo() + ", " +
+                            "message = \"O " + atributo.getNomeCampoEntity() +
+                            " não pode ter mais do que " + atributo.getTamanhoCampo() +
                             " caracteres\")\n");
                 }
 
                 atributoBuilder
-                        .modificadorAcesso(ModificadorDeAcesso.PRIVATE)
-                        .tipoAtributo(field.getTipo())
-                        .nomeDoAtributo(field.getNomeCampoEntity())
-                        .adicionarAnotacao("    @Column(name = \"" + field.getNomeCampoTabela() + "\")\n");
-
-                atributos.add(atributoBuilder.build());
+                        .modificadorAcesso(atributo.getModificadorDeAcesso())
+                        .tipoAtributo(atributo.getTipo())
+                        .nomeDoAtributo(atributo.getNomeCampoEntity())
+                        .adicionarAnotacao("    @Column(name = \"" + atributo.getNomeCampoTabela() + "\")\n");
             }
         }
 
         return atributos;
     }
 
+    private void adicionaAnotacaoJpaAEntidade(Entidade entidade, Set<String> anotationsClasse) {
+        anotationsClasse.add("@Entity\n");
 
+        var table = "@Table(name = \"" + entidade.getNomeDaTabela().toUpperCase() + "\")\n";
+        anotationsClasse.add(table);
+    }
+
+    private void adicionaImportsDoLombok(Set<String> anotationsClasse, Set<String> imports) {
+        anotationsClasse.add("@Data\n");
+        anotationsClasse.add("@Builder\n");
+        imports.add("import lombok.Builder;\n");
+        imports.add("import lombok.Data;\n");
+    }
+
+    private void adicionaImportsDaJPA(Set<String> imports) {
+        imports.add("import javax.persistence.*;\n");
+        imports.add("import javax.validation.constraints.*;\n");
+        imports.add("import java.io.Serializable;\n");
+    }
 }
